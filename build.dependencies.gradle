@@ -1,17 +1,39 @@
 repositories {
     mavenCentral()
     google() // Needed for androidx
+
+    maven { url = "https://maven.rowanmcalpin.com/" }
+    maven { url = "https://maven.brott.dev/" } // Remove if you don't intend to use the FTC Dashboard (required if using PedroPathing)
+    maven { url = "https://mymaven.bylazar.com/releases" }// Put back when tuning
+    maven {  url = "https://repo.dairy.foundation/releases"}
+
+
 }
 
 dependencies {
     implementation 'org.firstinspires.ftc:Inspection:11.1.0'
     implementation 'org.firstinspires.ftc:Blocks:11.1.0'
+    //noinspection Aligned16KB
     implementation 'org.firstinspires.ftc:RobotCore:11.1.0'
     implementation 'org.firstinspires.ftc:RobotServer:11.1.0'
     implementation 'org.firstinspires.ftc:OnBotJava:11.1.0'
     implementation 'org.firstinspires.ftc:Hardware:11.1.0'
     implementation 'org.firstinspires.ftc:FtcCommon:11.1.0'
     implementation 'org.firstinspires.ftc:Vision:11.1.0'
+    //noinspection GradleDependency
     implementation 'androidx.appcompat:appcompat:1.2.0'
-}
 
+    implementation 'com.pedropathing:ftc:2.1.2'
+    implementation 'com.pedropathing:telemetry:1.0.0'
+
+    implementation("com.bylazar.sloth:fullpanels:0.2.4+1.0.12")
+
+    implementation 'dev.nextftc:ftc:1.1.0'
+    implementation 'dev.nextftc:hardware:1.1.0' // If you would like to use the hardware module
+    implementation 'dev.nextftc:control:1.0.0'
+    implementation 'dev.nextftc:bindings:1.0.1'
+    implementation 'dev.nextftc.extensions:pedro:1.0.0'
+
+    implementation("dev.frozenmilk.sinister:Sloth:0.2.4") //Sloth
+
+}
