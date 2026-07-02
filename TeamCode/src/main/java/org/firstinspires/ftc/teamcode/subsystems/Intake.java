@@ -10,8 +10,8 @@ import dev.nextftc.hardware.actuators.NextMotor;
 
 public class Intake {
     NextMotor i = new NextMotor("intakeMotor", Inches.of(1.0), 0.2);
-    private IntakeState intakeState;
 
+    private IntakeState intakeState;
     public enum IntakeState {
         FORWARD,
         REVERSE,
@@ -58,6 +58,4 @@ public class Intake {
             }
         });
     }
-
-
 }
