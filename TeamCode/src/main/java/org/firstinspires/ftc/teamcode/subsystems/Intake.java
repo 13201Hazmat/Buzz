@@ -6,10 +6,11 @@ import static dev.nextftc.units.Units.Inches;
 
 import com.pedropathing.ivy.Command;
 
+import dev.nextftc.hardware.RobotController;
 import dev.nextftc.hardware.actuators.NextMotor;
 
 public class Intake {
-    NextMotor i = new NextMotor("intakeMotor", Inches.of(1.0), 0.2);
+    NextMotor i = new NextMotor(RobotController.controlHub(), 0, Inches.of(1.0), 0.2);
 
     private IntakeState intakeState;
     public enum IntakeState {
