@@ -8,6 +8,7 @@ repositories {
     maven {  url = "https://repo.dairy.foundation/releases"}
 
 
+
 }
 
 dependencies {
@@ -28,7 +29,9 @@ dependencies {
 
     //NextFTC
     implementation 'dev.nextftc.v2:hardware:0.0.1'
-    implementation 'dev.nextftc:bindings:1.0.1'
+    implementation 'dev.nextftc.v2:control:0.0.1'
+
+//    implementation 'dev.nextftc:bindings:1.0.1'
 
     //Pedro
     implementation 'com.pedropathing:ftc:2.1.2'
