@@ -8,8 +8,9 @@ import com.pedropathing.ivy.Command;
 
 import dev.nextftc.hardware.RobotController;
 import dev.nextftc.hardware.actuators.NextMotor;
+import dev.nextftc.robot.Mechanism;
 
-public class Intake {
+public class Intake implements Mechanism {
     NextMotor i = new NextMotor(RobotController.controlHub(), 0, Inches.of(1.0), 0.2);
 
     private IntakeState intakeState;
@@ -44,8 +45,8 @@ public class Intake {
         else power = forward;
     }
 
-    public Command periodic() {
-        return infinite(() -> {
+    @Override
+    public void periodic() {
             switch (intakeState) {
                 case FORWARD:
                     i.setThrottle(forward);
@@ -56,7 +57,7 @@ public class Intake {
                 case OFF:
                     i.setThrottle(off);
                     break;
-            }
-        });
+        };
     }
+
 }

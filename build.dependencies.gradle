@@ -5,6 +5,7 @@ repositories {
     maven { url = "https://maven.rowanmcalpin.com/" }
     maven { url = "https://maven.brott.dev/" } // Remove if you don't intend to use the FTC Dashboard (required if using PedroPathing)
     maven { url = "https://mymaven.bylazar.com/releases" }// Put back when tuning
+    maven { url "https://central.sonatype.com/repository/maven-snapshots/"}
     maven {  url = "https://repo.dairy.foundation/releases"}
 
 
@@ -28,9 +29,7 @@ dependencies {
     implementation("com.bylazar.sloth:fullpanels:0.2.4+1.0.12")
 
     //NextFTC
-    implementation 'dev.nextftc.v2:hardware:0.0.1'
-    implementation 'dev.nextftc.v2:control:0.0.1'
-
+    implementation 'dev.nextftc.v2:robot:0.0.2-SNAPSHOT'
 //    implementation 'dev.nextftc:bindings:1.0.1'
 
     //Pedro

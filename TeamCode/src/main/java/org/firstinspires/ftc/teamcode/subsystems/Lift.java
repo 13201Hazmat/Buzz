@@ -11,8 +11,9 @@ import dev.nextftc.control.feedforward.ElevatorFeedforward;
 import dev.nextftc.control.feedforward.GravityFeedforwardParameters;
 import dev.nextftc.hardware.RobotController;
 import dev.nextftc.hardware.actuators.NextMotor;
+import dev.nextftc.robot.Mechanism;
 
-public class Lift {
+public class Lift implements Mechanism {
     NextMotor l = new NextMotor(RobotController.controlHub(), 0 /*, depends on motor*/);
     NextMotor r = new NextMotor(RobotController.controlHub(), 0);
 
@@ -79,8 +80,7 @@ public class Lift {
         }
     }
 
-    public Command periodic() {
-        return infinite(() -> {
+    public void periodic() {
             double liftTarget = targetPosition(liftState);
             double liftMeasured = (l.getEncoderPosition().getMagnitude() + r.getEncoderPosition().getMagnitude()) / 2.0;
 
@@ -96,6 +96,5 @@ public class Lift {
 
             l.setThrottle(liftPower + diffyPower);
             r.setThrottle(liftPower - diffyPower);
-        });
     }
 }
