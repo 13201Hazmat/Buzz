@@ -9,9 +9,11 @@ import com.pedropathing.ivy.Command;
 import dev.nextftc.hardware.RobotController;
 import dev.nextftc.hardware.actuators.NextMotor;
 import dev.nextftc.robot.Mechanism;
+import dev.nextftc.units.measuretypes.Angle;
+import dev.nextftc.units.unittypes.AngleUnit;
 
 public class Intake implements Mechanism {
-    NextMotor i = new NextMotor(RobotController.controlHub(), 0, Inches.of(1.0), 0.2);
+    NextMotor i = new NextMotor(RobotController.controlHub(), 0);
 
     private IntakeState intakeState;
     public enum IntakeState {

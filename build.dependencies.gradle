@@ -26,11 +26,12 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
 
     //Sloth + Panels
+    implementation 'dev.frozenmilk.dairy:Core:2.2.4'
     implementation("com.bylazar.sloth:fullpanels:0.2.4+1.0.12")
 
     //NextFTC
     implementation 'dev.nextftc.v2:robot:0.0.2-SNAPSHOT'
-//    implementation 'dev.nextftc:bindings:1.0.1'
+    implementation 'dev.nextftc:bindings:1.0.1'
 
     //Pedro
     implementation 'com.pedropathing:ftc:2.1.2'
@@ -38,4 +39,7 @@ dependencies {
 
     //Ivy
     implementation 'com.pedropathing:ivy:1.0.0'
+
+    //Marrow
+    implementation 'com.skeletonarmyftc.marrow:core:1.1.2'
 }
