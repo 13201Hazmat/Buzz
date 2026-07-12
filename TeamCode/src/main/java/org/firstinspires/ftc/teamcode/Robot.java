@@ -5,6 +5,7 @@ import org.firstinspires.ftc.teamcode.subsystems.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.Lift;
 import org.firstinspires.ftc.teamcode.subsystems.Putter;
 
+import java.util.List;
 import java.util.Set;
 
 import dev.nextftc.robot.Mechanism;
@@ -26,6 +27,18 @@ public class Robot implements NextRobot {
     @Override
     public Set<Mechanism> getMechanisms() {
         return Set.of(i, l, p);
+    }
+
+    public Intake getIntake() {
+        return i;
+    }
+
+    public Lift getLift() {
+        return l;
+    }
+
+    public Putter getPutter() {
+        return p;
     }
 
     public Alliance getAlliance(){

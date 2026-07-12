@@ -1,37 +1,31 @@
 package org.firstinspires.ftc.teamcode.opmodes.teleop;
 
-import androidx.annotation.NonNull;
-
-
 import org.firstinspires.ftc.teamcode.Robot;
-import org.firstinspires.ftc.teamcode.data.Alliance;
+import org.firstinspires.ftc.teamcode.subsystems.Intake;
+import org.firstinspires.ftc.teamcode.subsystems.Putter;
 
-import dev.nextftc.robot.NextRobot;
 import dev.nextftc.robot.opmode.NextOpMode;
 import dev.nextftc.robot.opmode.NextTeleop;
-import dev.nextftc.robot.opmode.OpModeHook;
+import dev.nextftc.robot.triggers.CommandGamepad;
+import dev.nextftc.robot.triggers.Trigger;
 
-@NextTeleop(name = "NextTeleop", group = "Test")
+@NextTeleop(name = "test", group = "1")
 public class Teleop extends NextOpMode {
+    private final Robot robot;
 
-    private Robot robot;
-    public Teleop(@NonNull NextRobot robot, @NonNull OpModeHook... hooks) {
-        super(robot, hooks);
-    }
+    public Teleop(Robot robot){
+        super(robot);
+        this.robot = robot;
 
-    @Override
-    public void onInit() {
-        robot = new Robot(Alliance.BLUE);
-    }
+        CommandGamepad gp1 = new CommandGamepad(Trigger.Companion.getDefaultEventLoop(), gamepad1);
+        CommandGamepad gp2 = new CommandGamepad(Trigger.Companion.getDefaultEventLoop(), gamepad2);
 
-    @Override
-    public void onStart() {
-        //Gamepad logic goes here says claude
-
+        gp1.rightBumper().whileTrue(robot.getIntake().setSpeed(Intake.IntakeState.FORWARD));
+        gp1.leftBumper().whileTrue(robot.getPutter().setPutterState(Putter.PutterState.ON));
     }
 
     @Override
     public void periodic() {
-        super.periodic();
+        telemetry.update();
     }
 }

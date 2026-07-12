@@ -5,8 +5,9 @@ repositories {
     maven { url = "https://maven.rowanmcalpin.com/" }
     maven { url = "https://maven.brott.dev/" } // Remove if you don't intend to use the FTC Dashboard (required if using PedroPathing)
     maven { url = "https://mymaven.bylazar.com/releases" }// Put back when tuning
-    maven { url "https://central.sonatype.com/repository/maven-snapshots/"}
-    maven {  url = "https://repo.dairy.foundation/releases"}
+    maven { url = "https://central.sonatype.com/repository/maven-snapshots/"}
+    maven { url = "https://repo.dairy.foundation/releases"}
+    maven { url = "https://repo.dairy.foundation/snapshots" }
 
 
 
@@ -26,12 +27,12 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
 
     //Sloth + Panels
-    implementation 'dev.frozenmilk.dairy:Core:2.2.4'
-    implementation("com.bylazar.sloth:fullpanels:0.2.4+1.0.12")
+//    implementation("com.bylazar.sloth:fullpanels:0.2.4+1.0.12")
+    implementation("dev.frozenmilk.sinister:Sloth:0.2.4")
 
     //NextFTC
-    implementation 'dev.nextftc.v2:robot:0.0.2-SNAPSHOT'
-    implementation 'dev.nextftc:bindings:1.0.1'
+    implementation 'dev.nextftc.v2:robot:0.1.0-rc.1-SNAPSHOT'
+//    implementation 'dev.nextftc:bindings:1.0.1'
 
     //Pedro
     implementation 'com.pedropathing:ftc:2.1.2'

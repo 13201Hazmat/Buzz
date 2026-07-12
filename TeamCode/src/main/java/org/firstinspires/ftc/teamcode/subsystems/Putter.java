@@ -3,6 +3,8 @@ package org.firstinspires.ftc.teamcode.subsystems;
 import static dev.nextftc.units.Units.RotationsPerMinute;
 
 
+import com.pedropathing.ivy.Command;
+
 import dev.nextftc.hardware.RobotController;
 import dev.nextftc.hardware.actuators.NextMotor;
 import dev.nextftc.robot.Mechanism;
@@ -11,7 +13,7 @@ import dev.nextftc.units.measuretypes.AngularVelocity;
 public class Putter implements Mechanism {
     private final NextMotor putterMotor = new NextMotor(RobotController.controlHub(), 0);
 
-    enum PutterState {
+    public enum PutterState {
         ON,
         OFF
     }
@@ -33,8 +35,10 @@ public class Putter implements Mechanism {
 
     }
 
-    public void setPutterState(PutterState putterState){
-        this.putterState = putterState;
+    public Command setPutterState(PutterState putterState){
+        return instant(() -> {
+            this.putterState = putterState;
+        });
     }
 
     public AngularVelocity getTargetVelocity(PutterState putterState){
