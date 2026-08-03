@@ -1,11 +1,13 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.pedropathing.follower.Follower;
+
 import org.firstinspires.ftc.teamcode.data.Alliance;
 import org.firstinspires.ftc.teamcode.subsystems.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.Lift;
 import org.firstinspires.ftc.teamcode.subsystems.Putter;
+import org.firstinspires.ftc.teamcode.subsystems.vision.Limelight;
 
-import java.util.List;
 import java.util.Set;
 
 import dev.nextftc.robot.Mechanism;
@@ -14,31 +16,32 @@ import dev.nextftc.robot.NextRobot;
 public class Robot implements NextRobot {
 
     private Alliance robotAlliance;
+    private Follower follower;
 
     public Robot(Alliance robotAlliance){
         this.robotAlliance = robotAlliance;
     }
 
-    private final Intake i = new Intake();
-    private final Lift l = new Lift();
-    private final Putter p = new Putter();
-
+    private final Intake intake = new Intake();
+    private final Lift lift = new Lift();
+    private final Putter putter = new Putter();
+    //private final Limelight limelight = new Limelight();
 
     @Override
     public Set<Mechanism> getMechanisms() {
-        return Set.of(i, l, p);
+        return Set.of(intake, lift, putter);
     }
 
     public Intake getIntake() {
-        return i;
+        return intake;
     }
 
     public Lift getLift() {
-        return l;
+        return lift;
     }
 
     public Putter getPutter() {
-        return p;
+        return putter;
     }
 
     public Alliance getAlliance(){
