@@ -1,54 +1,49 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.pedropathing.follower.Follower;
+import com.qualcomm.robotcore.hardware.Gamepad;
 
-import org.firstinspires.ftc.teamcode.data.Alliance;
-import org.firstinspires.ftc.teamcode.subsystems.Intake;
-import org.firstinspires.ftc.teamcode.subsystems.Lift;
-import org.firstinspires.ftc.teamcode.subsystems.Putter;
-import org.firstinspires.ftc.teamcode.subsystems.vision.Limelight;
+import org.firstinspires.ftc.teamcode.mechanisms.Drivetrain;
+import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 
 import java.util.Set;
 
+import dev.nextftc.control.drive.MecanumKinematics;
+import dev.nextftc.hardware.RobotController;
 import dev.nextftc.robot.Mechanism;
 import dev.nextftc.robot.NextRobot;
+import dev.nextftc.robot.Telemetry;
+import dev.nextftc.robot.drive.DriveCommandsKt;
+import gay.zharel.fateweaver.flight.FlightRecorder;
 
 public class Robot implements NextRobot {
-
-    private Alliance robotAlliance;
     private Follower follower;
+    public final Drivetrain drivetrain = new Drivetrain();
 
-    public Robot(Alliance robotAlliance){
-        this.robotAlliance = robotAlliance;
+    public Robot(){
+        Telemetry.addBackend(FlightRecorder.INSTANCE);
     }
 
-    private final Intake intake = new Intake();
-    private final Lift lift = new Lift();
-    private final Putter putter = new Putter();
-    //private final Limelight limelight = new Limelight();
+    public Follower getFollower() {
+        if (follower == null) {
+            follower = Constants.createFollower(RobotController.hardwareMap());
+        }
 
-    @Override
-    public Set<Mechanism> getMechanisms() {
-        return Set.of(intake, lift, putter);
+        return follower;
     }
 
-    public Intake getIntake() {
-        return intake;
+    public void updateFollower(){
+        follower.update();
     }
 
-    public Lift getLift() {
-        return lift;
-    }
-
-    public Putter getPutter() {
-        return putter;
-    }
-
-    public Alliance getAlliance(){
-        return robotAlliance;
-    }
-
-    public void setAlliance(Alliance robotAlliance){
-        this.robotAlliance = robotAlliance;
+    public void startDrive(Gamepad gamepad1) {
+        DriveCommandsKt.mecanumDrive(
+                drivetrain.frontLeft,
+                drivetrain.frontRight,
+                drivetrain.backLeft,
+                drivetrain.backRight,
+                gamepad1,
+                new MecanumKinematics()
+        );
     }
 }

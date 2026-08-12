@@ -1,8 +1,9 @@
 package org.firstinspires.ftc.teamcode.opmodes.teleop;
 
+import com.pedropathing.ivy.commands.Commands;
+import com.qualcomm.robotcore.hardware.Gamepad;
+
 import org.firstinspires.ftc.teamcode.Robot;
-import org.firstinspires.ftc.teamcode.subsystems.Intake;
-import org.firstinspires.ftc.teamcode.subsystems.Putter;
 
 import dev.nextftc.robot.opmode.NextOpMode;
 import dev.nextftc.robot.opmode.NextTeleop;
@@ -16,16 +17,18 @@ public class Teleop extends NextOpMode {
     public Teleop(Robot robot){
         super(robot);
         this.robot = robot;
-
+        robot.getFollower();
+        Trigger.Companion.getDefaultEventLoop().clear();
         CommandGamepad gp1 = new CommandGamepad(Trigger.Companion.getDefaultEventLoop(), gamepad1);
-        CommandGamepad gp2 = new CommandGamepad(Trigger.Companion.getDefaultEventLoop(), gamepad2);
 
-        gp1.rightBumper().whileTrue(robot.getIntake().setSpeed(Intake.IntakeState.FORWARD));
-        gp1.leftBumper().whileTrue(robot.getPutter().setPutterState(Putter.PutterState.ON));
+        //Driving
+        robot.startDrive(gamepad1);
+
     }
 
     @Override
     public void periodic() {
         telemetry.update();
+        robot.updateFollower();
     }
 }

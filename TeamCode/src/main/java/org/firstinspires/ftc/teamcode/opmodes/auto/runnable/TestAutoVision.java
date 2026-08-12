@@ -24,6 +24,11 @@ public class TestAutoVision extends NextOpMode {
     public TestAutoVision(@NonNull NextRobot robot, @NonNull OpModeHook... hooks) {
         super(robot, hooks);
 
-        this.robot = new Robot(Alliance.RED);
+        this.robot = new Robot();
+    }
+
+    @Override
+    public void start() {
+        commands.moveToNearestBalls();
     }
 }

@@ -31,16 +31,17 @@ dependencies {
     implementation("dev.frozenmilk.sinister:Sloth:0.2.4")
 
     //NextFTC
-    implementation 'dev.nextftc.v2:robot:0.1.0-rc.1-SNAPSHOT'
+    implementation 'dev.nextftc.v2:robot:0.1.0'
 //    implementation 'dev.nextftc:bindings:1.0.1'
 
     //Pedro
     implementation 'com.pedropathing:ftc:2.1.2'
     implementation 'com.pedropathing:telemetry:1.0.0'
 
-    //Ivy
-    implementation 'com.pedropathing:ivy:1.0.0'
 
-    //Marrow
+    //Zachweaver
+    implementation 'gay.zharel.fateweaver:ftc:0.4.0'
+
+    // MARROW
     implementation 'com.skeletonarmyftc.marrow:core:1.1.2'
 }

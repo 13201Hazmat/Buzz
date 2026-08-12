@@ -36,7 +36,6 @@ public class MarrowTest extends NextOpMode {
 
         prompter = new Prompter(opModeAdapter);
 
-        robot = new Robot(Alliance.BLUE);
 
         prompter.prompt("alliance", new OptionPrompt<>("Select Alliance", Alliance.RED, Alliance.BLUE))
                 .label("Alliance Color")
@@ -46,7 +45,6 @@ public class MarrowTest extends NextOpMode {
 
     private void onPromptsComplete() {
         alliance = prompter.get("alliance");
-        robot.setAlliance(alliance);
         telemetry.addData("Selected Alliance", alliance);
         telemetry.update();
     }
