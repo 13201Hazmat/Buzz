@@ -6,25 +6,17 @@ import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+import dev.nextftc.hardware.webcams.NextLimelight;
+
 public class TestVision{
 
-    private Limelight3A limelight;
-
-    public Limelight3A getLimelight() {
+    private NextLimelight limelight = new NextLimelight("limelight");
+    public NextLimelight getLimelight() {
         return limelight;
     }
 
     public TestVision(HardwareMap hardwareMap) {
-        limelight = hardwareMap.get(Limelight3A.class, "limelight");
-        limelight.pipelineSwitch(0);
-        limelight.start();
-    }
-    public LLResult getTestVisionResult(){
-        LLResult result = limelight.getLatestResult();
-        if(result == null || !result.isValid()){
-            return null;
-        }
-        return result;
+        limelight.startReading(0, 50);
     }
 
     // Forward-distance coefficients

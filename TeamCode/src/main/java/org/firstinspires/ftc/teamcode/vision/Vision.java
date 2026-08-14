@@ -7,25 +7,14 @@ import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import dev.nextftc.hardware.RobotController;
+import dev.nextftc.hardware.webcams.NextLimelight;
 
 public class Vision {
-    private Limelight3A limelight;
-    public Vision(HardwareMap hardwareMap) {
-        limelight = hardwareMap.get(Limelight3A.class, "limelight");
-        limelight.pipelineSwitch(0);
-        limelight.start();
+    private final NextLimelight limelight = new NextLimelight("limelight");
+    public Vision() {
+        limelight.startReading(0, 50);
     }
-    private final LLResult visionResult = limelight.getLatestResult();
-
-    public LLResult getVisionResult(){
-        LLResult result = limelight.getLatestResult();
-        if(result == null || result.isValid()){
-            return null;
-        }
-        return result;
-    }
-
-    public Limelight3A getLimelight() {
+    public NextLimelight getLimelight() {
         return limelight;
     }
     public Pose getFinalPose(double targetX, double targetY, Pose currentPose) {
@@ -34,12 +23,12 @@ public class Vision {
             return null;
         }
 
-        double cameraPitch = 0.0;
+        double cameraPitch = 10.0;
         double ballRadius = 1.4;
-        double cameraHeight = 10.375;
+        double cameraHeight = 9.5;
 
-        double cameraOffsetY = 5.0;
-        double cameraOffsetX = 0.0;
+        double cameraOffsetY = 7.5;
+        double cameraOffsetX = 7.5;
 
         double cameraToBallAngle = Math.toRadians(cameraPitch + targetY);
 
@@ -66,5 +55,9 @@ public class Vision {
         double fieldY = currentPose.getY() + robotToBallVector.getYComponent();
 
         return new Pose(fieldX, fieldY, currentPose.getHeading());
+    }
+
+    public Pose getFinalPose(Pose currentPose){
+        return getFinalPose(limelight.getTX(), limelight.getTY(), currentPose);
     }
 }

@@ -17,7 +17,7 @@ public class PathsAndPoses {
 
     public PathsAndPoses(Robot robot) {
         this.robot = robot;
-        this.vision = new Vision(RobotController.hardwareMap());
+        this.vision = new Vision();
     }
 
     public Pose getCurrentPose() {
@@ -32,13 +32,13 @@ public class PathsAndPoses {
             return null;
         }
 
-        LLResult result = vision.getVisionResult();
+        LLResult result = vision.getLimelight().getLatestResult();
 
         if (result == null || !result.isValid()) {
             return null;
         }
 
-        return vision.getFinalPose(vision.getVisionResult().getTx(), vision.getVisionResult().getTy(), currentPose);
+        return vision.getFinalPose(currentPose);
     }
 
     public PathChain buildPathToBalls() {
