@@ -6,9 +6,7 @@ import com.pedropathing.paths.PathChain;
 import com.qualcomm.hardware.limelightvision.LLResult;
 
 import org.firstinspires.ftc.teamcode.Robot;
-import org.firstinspires.ftc.teamcode.vision.Vision;
-
-import dev.nextftc.hardware.RobotController;
+import org.firstinspires.ftc.teamcode.mechanisms.vision.Vision;
 
 public class PathsAndPoses {
 

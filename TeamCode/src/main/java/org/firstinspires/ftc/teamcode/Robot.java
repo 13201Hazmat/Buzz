@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.teamcode.mechanisms.Drivetrain;
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
+import org.firstinspires.ftc.teamcode.mechanisms.vision.Vision;
 
 import java.util.Set;
 
@@ -19,6 +20,7 @@ import gay.zharel.fateweaver.flight.FlightRecorder;
 public class Robot implements NextRobot {
     private Follower follower;
     public final Drivetrain drivetrain = new Drivetrain();
+    public final Vision vision = new Vision();
 
     public Robot(){
         Telemetry.addBackend(FlightRecorder.INSTANCE);
@@ -45,5 +47,10 @@ public class Robot implements NextRobot {
                 gamepad1,
                 new MecanumKinematics()
         );
+    }
+
+    @Override
+    public Set<Mechanism> getMechanisms() {
+        return Set.of(drivetrain, vision);
     }
 }

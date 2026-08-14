@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.vision;
+package org.firstinspires.ftc.teamcode.mechanisms.vision;
 
 import com.pedropathing.geometry.Pose;
 import com.pedropathing.math.Vector;
@@ -8,8 +8,9 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import dev.nextftc.hardware.RobotController;
 import dev.nextftc.hardware.webcams.NextLimelight;
+import dev.nextftc.robot.Mechanism;
 
-public class Vision {
+public class Vision implements Mechanism {
     private final NextLimelight limelight = new NextLimelight("limelight");
     public Vision() {
         limelight.startReading(0, 50);
