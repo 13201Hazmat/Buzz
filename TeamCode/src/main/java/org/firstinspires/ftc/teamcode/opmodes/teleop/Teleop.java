@@ -18,7 +18,7 @@ public class Teleop extends NextOpMode {
     private final AutoCommands autoCommands;
 
     public Teleop (Robot robot){
-        super(robot, BulkReadHook.INSTANCE);
+        super(robot);
         this.robot = robot;
         PathsAndPoses paths = new PathsAndPoses(robot);
         this.autoCommands = new AutoCommands(robot, paths);
