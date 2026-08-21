@@ -1,11 +1,20 @@
 package org.firstinspires.ftc.teamcode;
 
+import static com.pedropathing.ivy.commands.Commands.waitUntil;
+import static com.pedropathing.ivy.groups.Groups.parallel;
+import static com.pedropathing.ivy.groups.Groups.sequential;
+
 import com.pedropathing.follower.Follower;
+import com.pedropathing.ivy.Command;
+import com.pedropathing.ivy.commands.Commands;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
+import org.firstinspires.ftc.teamcode.mechanisms.Bucket;
 import org.firstinspires.ftc.teamcode.mechanisms.Drivetrain;
+import org.firstinspires.ftc.teamcode.mechanisms.Intake;
+import org.firstinspires.ftc.teamcode.mechanisms.Putter;
+import org.firstinspires.ftc.teamcode.mechanisms.Lift;
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
-import org.firstinspires.ftc.teamcode.mechanisms.vision.Vision;
 
 import java.util.Set;
 
@@ -19,8 +28,12 @@ import gay.zharel.fateweaver.flight.FlightRecorder;
 
 public class Robot implements NextRobot {
     private Follower follower;
+    public final Bucket bucket = new Bucket();
     public final Drivetrain drivetrain = new Drivetrain();
-    public final Vision vision = new Vision();
+    public final Intake intake = new Intake();
+    public final Lift lift = new Lift();
+    public final Putter putter = new Putter();
+
 
     public Robot(){
         Telemetry.addBackend(FlightRecorder.INSTANCE);
@@ -49,8 +62,32 @@ public class Robot implements NextRobot {
         );
     }
 
+    public Command lift(Lift.LiftState liftState){
+        return parallel(
+            lift.setPosition(liftState),
+            intake.setSpeed(Intake.IntakeState.OFF)
+        );
+    }
+    public Command drop(){
+        return sequential(
+            bucket.setDrop(),
+            waitUntilDisplaced(8),
+            lift.setPosition(Lift.LiftState.HOME)
+        );
+    }
+
+    private Command waitUntilDisplaced(double distance) {
+        double startX = getFollower().getPose().getX();
+        double startY = getFollower().getPose().getY();
+
+        return waitUntil(() -> {
+            double dx = getFollower().getPose().getX() - startX;
+            double dy = getFollower().getPose().getY() - startY;
+            return Math.sqrt(dx * dx + dy * dy) >= distance;
+        });
+    };
     @Override
     public Set<Mechanism> getMechanisms() {
-        return Set.of(drivetrain, vision);
+        return Set.of(bucket, drivetrain, intake, lift, putter);
     }
 }

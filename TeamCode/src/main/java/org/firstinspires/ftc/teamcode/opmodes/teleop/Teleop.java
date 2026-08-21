@@ -1,8 +1,10 @@
 package org.firstinspires.ftc.teamcode.opmodes.teleop;
 
 import com.pedropathing.geometry.Pose;
+import com.pedropathing.ivy.commands.Commands;
 
 import org.firstinspires.ftc.teamcode.Robot;
+import org.firstinspires.ftc.teamcode.mechanisms.Lift;
 import org.firstinspires.ftc.teamcode.opmodes.auto.paths.AutoCommands;
 import org.firstinspires.ftc.teamcode.opmodes.auto.paths.PathsAndPoses;
 
@@ -15,22 +17,32 @@ import dev.nextftc.robot.triggers.Trigger;
 @NextTeleop(name = "test", group = "1")
 public class Teleop extends NextOpMode {
     private final Robot robot;
-    private final AutoCommands autoCommands;
 
     public Teleop (Robot robot){
         super(robot);
         this.robot = robot;
-        PathsAndPoses paths = new PathsAndPoses(robot);
-        this.autoCommands = new AutoCommands(robot, paths);
+
+        Trigger.Companion.getDefaultEventLoop().clear();
     }
 
     @Override
     public void start() {
         this.robot.getFollower();
-        Trigger.Companion.getDefaultEventLoop().clear();
-        CommandGamepad gp1 = new CommandGamepad(Trigger.Companion.getDefaultEventLoop(), gamepad1);
+
+
+        CommandGamepad gp1 = new CommandGamepad(gamepad1);
         this.robot.startDrive(gamepad1);
-        gp1.rightBumper().onTrue(autoCommands.moveToNearestBalls());
+
+        //Intake
+        gp1.leftBumper().onTrue(Commands.instant(robot.intake::cycle));
+
+        //Lift
+        gp1.dpadUp().onTrue(robot.lift(Lift.LiftState.HIGH));
+        gp1.dpadRight().onTrue(robot.lift(Lift.LiftState.LOW));
+        gp1.dpadDown().onTrue(robot.lift.setPosition(Lift.LiftState.HOME));
+
+        //Drop
+        gp1.rightBumper().onTrue(robot.drop());
     }
 
     @Override
@@ -39,6 +51,5 @@ public class Teleop extends NextOpMode {
         robot.updateFollower();
         Pose robotPose = robot.getFollower().getPose();
         telemetry.addData("Robot Position", robotPose);
-        telemetry.addData("Pollen Position", robot.vision.getFinalPose(robotPose));
     }
 }
